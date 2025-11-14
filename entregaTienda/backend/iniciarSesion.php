@@ -26,7 +26,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		session_start();
 		// $usu tiene campos correo y codRes, correo 
 		$_SESSION['usuario'] = $usu;
-		$_SESSION['carrito'] = [];
+
+		$fecha_para_sql = date("Y-m-d");
+        
+
+		$_SESSION['carrito'] = [
+            // Aquí NO va el ID autoincrement de la BD. El ID lo obtendrás cuando 
+            // insertes la cabecera del carrito en la base de datos por primera vez.
+            'CodCarro' => null, // Usaremos 'null' para indicar que no ha sido guardado aún
+            'Fecha' => $fecha_para_sql, // Fecha de creación
+            'Enviado' => 0, // Estado inicial (e.g., 0 = 'Pendiente/Abierto')
+            
+            // Este es el array que contendrá los productos (los detalles del carrito)
+            'productos' => [] 
+        ];
 		header("Location: ../frontend/catalogo.php");
         exit;
 	}	

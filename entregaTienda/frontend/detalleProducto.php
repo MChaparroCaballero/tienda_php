@@ -30,18 +30,21 @@ $ruta_imagen_final_saneada = htmlspecialchars($ruta_imagen_final);
 </head>
 <body>
 
-    
     <img width="500rem" height="500rem" src="<?= $ruta_imagen_final_saneada ?>" alt="Imagen del Producto">
     <?php 
     echo "<h1>" . $resultado['Nombre'] . "</h1>";
     echo "<p>Descripción: " . $resultado['Descripcion'] . "</p>";
     echo "<h2>Precio: $" . $resultado['Precio'] . "</h2>";
+    echo '<form method="POST" action="../backend/anadirAlCarro.php">';
+    echo '<input type="hidden" name="producto_id" value="' . htmlspecialchars($resultado['CodProd']) . '">';
+    echo '<input type="number" id="cantidad" name="cantidad" min="0" max="'. $resultado['Cantidad'] .'" value="0"></input>';
+    echo '<button type="submit">Añadir al carrito</button>';
+    echo "</form>"
+    
     ?>
     
-    <button onclick="añadirCantidadComprar()">+</button>
-    <p id="cantidadComprar">0</p>
-    <button onclick="quitarCantidadComprar()">-</button>
-    <button onclick="">Añadir al carrito</button>
+   
+   
 
 </body>
 </html>
